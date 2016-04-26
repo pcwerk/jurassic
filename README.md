@@ -1,11 +1,11 @@
 # jurassic
 A suite of tools to collect *nix artifacts
 
-# System Check
+## System Check
 
 To check for potential *nix system vulnerability, there are two formidable tool sets: lynis [1] and unix-privesc-check [2].  Both of are freely available.
 
-# Capturing Artifacts
+## Capturing Artifacts
 
 ### Capture running processes
 
@@ -16,7 +16,6 @@ To capture running processes:
 ```
 
 Log files are written to `OUTDIR` in `config`.  This value can be overwritten.
-
 
 ### References
 
