@@ -18,5 +18,7 @@ To capture running processes:
 Log files are written to `OUTDIR` in `config`.  This value can be overwritten.
 
 
+### References
+
 - [1] https://cisofy.com/lynis/
 - [2] https://github.com/pentestmonkey/unix-privesc-check
