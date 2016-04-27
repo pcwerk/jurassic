@@ -30,3 +30,33 @@ lsmod >> $OUT/Loaded_modules.txt
 chkconfig --list >> $OUT/chkconfig.txt
 service --status-all >> $OUT/Running_services.txt
 
+## User
+OUT=${OUTDIR}/user
+mkdir -p ${OUT}
+date >> ${OUT}/index
+
+# User Info
+cat /etc/passwd >> $OUT/passwd.txt
+lastlog >> $OUT/Last_login_per_user.txt
+awk -F: '($3 == "0") {print}' /etc/passwd >> $OUT/Root_Users.txt
+cat /etc/group >> $OUT/group.txt
+cat /etc/sudoers >> $OUT/Sudoers.txt
+last -Faiwx >> $OUT/Last_logins.txt 
+lastb >> $OUT/Failed_Logins.txt 
+w >> $OUT/Logged_In_Users.txt
+
+for i in `ls /home/`; do
+  cat /home/$i/.bash_history >> $OUT/home-$i-bash_History.txt
+done
+
+# Cron Jobs
+OUT=${OUTDIR}/cron
+mkdir -p $OUT
+cp -r /etc/cron* $OUT/cron/
+
+# Logs
+OUT=${OUTDIR}/logs
+mkdir -p $OUT
+cp -r /var/log/* $OUT/logs/ 
+
+

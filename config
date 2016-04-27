@@ -9,6 +9,7 @@ datetime=$(date +%Y%m%d%H%M%S)
 
 OUTDIR=/tmp/${hostname}
 PS_DELAY=10
+HASH_DIRS="/opt /bin /root /sbin /usr /etc"
 
 ## setup directories
 mkdir -p ${OUTDIR}
