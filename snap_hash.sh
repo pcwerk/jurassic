@@ -19,4 +19,10 @@ echo Time stamp: `date` >> $OUT/Hashes.txt
 echo >> $OUT/Hashes.txt
 echo ======================MD5 HASHES===================== >> $OUT/Hashes.txt
 echo >> $OUT/Hashes.txt
-find $HASH_DIRS -type f \( ! -name Hashes.txt \)-exec md5sum {} >> $OUT/Hashes.txt \; 
+
+for f in  $HASH_DIRS; do
+  echo $f
+  find $f -type f | xargs -d '\n' md5sum > $OUT/md5-hashes.txt
+  find $f -type f | xargs -d '\n' sha1sum > $OUT/sha1-hashes.txt
+done
+
