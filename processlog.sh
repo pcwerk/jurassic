@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config
+source "./config"
 
 if [ -z $OUTDIR ] ; then
   OUTDIR=.
