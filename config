@@ -1,9 +1,6 @@
 ## programs (update for specific OS)
 
-PS='ps axuwww'
-TAR='tar -cvf'
-## Note on solaris systems, gzip may not exist, so replace gzip with compress
-COMPRESS='gzip'
+source "./config.linux"
 
 ## configuration
 

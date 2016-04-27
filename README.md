@@ -13,7 +13,7 @@ Both of these are formidable tool sets and both of are freely available.
 
 ## Capturing Artifacts
 
-In addition to the above tool sets, we provide here a few portable shell scripts that performs rudimentary artifact capture.  For each of the scripts, the main control file is `config`.  Note that default values can be used as-is.  Customization is recommended for specific projects and should only be made in the `config` file.
+In addition to the above tool sets, we provide here a few portable shell scripts that performs rudimentary artifact capture.  For each of the scripts, the main control file is `config`.  Note that default values can be used as-is; and if needed customization is recommended for specific projects and system and should only be made in the `config` and `config.$OS` files.
 
 ### Capture running processes
 

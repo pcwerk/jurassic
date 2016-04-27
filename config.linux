@@ -1,0 +1,6 @@
+## programs (update for specific OS)
+
+PS='ps axuwww'
+TAR='tar -cvf'
+COMPRESS='gzip'
+
