@@ -6,9 +6,6 @@ if [ -z $OUTDIR ] ; then
   OUTDIR=.
 fi
 
-DELAY=10
-PS='ps axuwww'
-
 ## setup
 mkdir -p ${OUTDIR}/processes
 INDEX=${OUTDIR}/processes/index-$(date +%F-%T)
@@ -41,5 +38,5 @@ while true; do
   echo "$NOW $OUT" >> $INDEX
   echo "\n\n****** Process check at $NOW  ******\n\n" >> $OUT 
   $PS >> $OUT
-  spin ${DELAY} "  ${NOW}   ${OUT}"
+  spin ${PS_DELAY} "  ${NOW}   ${OUT}"
 done 

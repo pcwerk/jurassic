@@ -1,7 +1,17 @@
+## programs (update for specific OS)
+
+PS='ps axuwww'
+TAR='tar -cvf'
+## Note on solaris systems, gzip may not exist, so replace gzip with compress
+COMPRESS='gzip'
+
 ## configuration
 
 hostname=$(hostname -s)
 datetime=$(date +%Y%m%d%H%M%S)
-OUTDIR=/tmp/${hostname}
 
+OUTDIR=/tmp/${hostname}
+PS_DELAY=10
+
+## setup directories
 mkdir -p ${OUTDIR}
