@@ -3,4 +3,4 @@
 PS='ps axuwww'
 TAR='tar -cvf'
 COMPRESS='gzip'
-
+OS=linux
