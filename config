@@ -1,4 +1,7 @@
 ## configuration
 
-OUTDIR=/tmp
+hostname=$(hostname -s)
+datetime=$(date +%Y%m%d%H%M%S)
+OUTDIR=/tmp/${hostname}
 
+mkdir -p ${OUTDIR}

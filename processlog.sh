@@ -6,12 +6,13 @@ if [ -z $OUTDIR ] ; then
   OUTDIR=.
 fi
 
-## setup
-INIT=$(date +%F-%T)
-OUT="${OUTDIR}/${INIT}-running-processes"
 DELAY=10
 PS='ps axuwww'
-touch $OUT
+
+## setup
+mkdir -p ${OUTDIR}/processes
+INDEX=${OUTDIR}/processes/index-$(date +%F-%T)
+touch $INDEX
 
 ## spin, action, delay
 spin() {
@@ -25,15 +26,20 @@ spin() {
       set -- "$@" $marks
     fi
     shift $(( (i+1) % $# ))
-    printf '%s\r\r' " $1"
-    count=$[$count +1]
+    printf '%s\r\r' "$1"
     sleep 1
+    count=$[$count +1]
   done
 }
 
+echo "  Index: $INDEX"
+echo "  Date & Time           Log File"
 while true; do
   NOW=$(date +%F-%T)
+  OUT="${OUTDIR}/processes/${NOW}"
+
+  echo "$NOW $OUT" >> $INDEX
   echo "\n\n****** Process check at $NOW  ******\n\n" >> $OUT 
   $PS >> $OUT
-  spin ${DELAY} " ${NOW} ${OUT}"
+  spin ${DELAY} "  ${NOW}   ${OUT}"
 done 
