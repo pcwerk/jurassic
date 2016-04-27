@@ -9,12 +9,13 @@ fi
 ## setup
 OUT=${OUTDIR}/basic
 mkdir -p ${OUT}
+date >> ${OUT}/index
 
 ## capture basic information
 ps -axjf >> $OUT/List_of_Running_Processes.txt
 pstree -ah >> $OUT/Process_tree_and_arguments.txt
 mount >> $OUT/Mounted_items.txt
-diskutil list >> $OUT/BasicInfo/Disk_utility.txt
+diskutil list >> $OUT/Disk_utility.txt
 uptime >> $OUT/System_uptime.txt
 printenv >> $OUT/System_environment_detailed.txt
 cat /proc/version >> $OUT/OS_kernel_version.txt
@@ -28,5 +29,4 @@ find / -type d -perm -1000 -exec ls -ld {} \; >> $OUT/World_Writable.txt
 lsmod >> $OUT/Loaded_modules.txt
 chkconfig --list >> $OUT/chkconfig.txt
 service --status-all >> $OUT/Running_services.txt
-
 
