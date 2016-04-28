@@ -1,10 +1,10 @@
-# jurassic
+# Jurassic
 
-A suite of tools to collect unix artifacts.  Jurassic is a suite of tools and tutorials -- it is not a one-stop shop for artifact collection.
+Jurassic is a suite of tools and tutorials -- it is not a one stop shop for artifact collection.
 
 ## System Check
 
-To check for unix system vulnerability we recommend using 
+To check for unix system vulnerabilities, we recommend using 
 
   * [lynis](https://cisofy.com/lynis/)
   * [unix-privesc-check](https://github.com/pentestmonkey/unix-privesc-check)
@@ -50,5 +50,5 @@ A package `$hostname.tar.gz` will be created.  This file can be copied back into
 
 ### References
 
-- https://cisofy.com/lynis/
+- https://cisofy.com/lynis
 - https://github.com/pentestmonkey/unix-privesc-check
