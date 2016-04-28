@@ -11,7 +11,7 @@ To check for unix system vulnerability we recommend using
 
 Both of these are formidable tool sets and both of are freely available.
 
-What doing analysis on any systems, it's important to ensure that actions do not negatively affect the system in review.  While this is a noble goal, it's not always a realistic goal.  To deconflict who/how in the aftermath, we recommend using the [script](http://www.computerhope.com/unix/uscript.htm) command.
+When doing an analysis on any systems, it's important to ensure that actions do not negatively affect the system in review.  While this is a noble goal, it's not always a realistic goal.  To deconflict who/how in the aftermath, we recommend using the [script](http://www.computerhope.com/unix/uscript.htm) command.
 
 ## Capture System Artifacts
 
@@ -35,7 +35,7 @@ To capture running processes, start the script in a separate window.  The script
 ./log_process.sh
 ```
 
-Because this is continuously executed command, we recommend that it is executed in a [screen](http://www.computerhope.com/unix/screen.htm) session.  If you are not familiar with `screen`, it's a simple builin-in (for most *nix systems) that lets users create, attach and detach from virtual terminals as neeeded.
+Because `log_process.sh`  runs continuously, we recommend that it is executed in a [screen](http://www.computerhope.com/unix/screen.htm) session.  If you are not familiar with `screen`, it's a simple builin-in (for most *nix systems) that lets users create, attach and detach from virtual terminals as neeeded.
 
 
 ### Data Collection Package
