@@ -54,17 +54,28 @@ A package `$hostname.tar.gz` will be created.  This file can be copied back into
 
 ## Analyze
 
-Once the data has been collected, we'd need to analyze for malware.  The generalapproach for data analysis is based on chained processing flow:
+Once the data has been collected, we'd need to analyze for malware. The generalapproach for data analysis is based on chained processing
+flow:
 
 1. Identify "known bads" by checking hash against blacklist
 2. Eliminate "known "goods" by checking hash against whitelist
 3. Tag potentially bad by checking filenames against blacklist 
 4. Tag potentially bad by checking filenames not on the whitelist 
-5. Manual review of remaining candidates from 1, 2, 3 and 4  
+5. Manual review of remaining candidates from 1, 2, 3 and 4
 
 ### Known Bads 
 
 There is no single recipe for obtaining known bads other that scouring the Internet for bad signatures.
+
+Given two files `malware.txt` (a file containing all hash of know bad
+malwares) and `data.txt` which is the collected artifacts.
+
+```bash
+./check_hash bad malware.txt data.txt
+```
+
+The `check_hash` program will examine `data.txt` and report if any of
+its hashes are found in `malware.txt`
 
 ### Known Goods
 
@@ -86,7 +97,15 @@ The file `hash-sorted-by-md5.txt` now has known good hashes and potentially know
 ```bash
 cat hash-sorted-by-md5.txt | \
    awk -v FS='" "|"$' '{print $2}' | \
-   sort | uniq > filename-goods.txt 
+   sort | uniq | tr '[:lower:]' '[:upper:]' > filename-goods.txt 
+```
+
+Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print
+those unconfirmed hashes (those not found in
+`hash-sorted-by-md5.txt`).
+
+```bash
+./check_hash good hash-sorted-by-md5.txt data.txt
 ```
 
 ## References
