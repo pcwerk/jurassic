@@ -67,15 +67,13 @@ flow:
 
 There is no single recipe for obtaining known bads other that scouring the Internet for bad signatures.
 
-Given two files `malware.txt` (a file containing all hash of know bad
-malwares) and `data.txt` which is the collected artifacts.
+Given two files `malware.txt` (a file containing all hash of know bad malwares) and `data.txt` which is the collected artifacts.
 
 ```bash
 ./check_hash bad malware.txt data.txt
 ```
 
-The `check_hash` program will examine `data.txt` and report if any of
-its hashes are found in `malware.txt`
+The `check_hash` program will examine `data.txt` and report if any of its hashes are found in `malware.txt`
 
 ### Known Goods
 
@@ -85,28 +83,30 @@ The best source for known good hash can be obtained from the [NIST National Soft
 2. Unzip the file `NSRLFile.txt.zip` found in `RDS_Unified`
 3. Extract the MD5 sum hash:
 ```bash
-cat NSRLFile.txt  | awk -F, 'NR > 1{print $2,$4}' > hash.txt
-```
-4. There are many duplicates, so we should remove duplicates
-```bash
-cat hash.txt | uniq > hash-sorted-by-md5.txt
-```
-
-The file `hash-sorted-by-md5.txt` now has known good hashes and potentially known good filenames.  To obtain potentially known good filenames (note that this is the weakess claim in so far malware detection)
-
-```bash
-cat hash-sorted-by-md5.txt | \
-   awk -v FS='" "|"$' '{print $2}' | \
-   sort | uniq | tr '[:lower:]' '[:upper:]' > filename-goods.txt 
+cat NSRLFile.txt | \
+  awk -F, 'NR>1{print $2}' | \
+  sed -e s/\"//g | \
+  tr '[:lower:]' '[:upper:]' | \
+  sort | uniq > hash-sorted-by-md5.txt
 ```
 
-Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print
-those unconfirmed hashes (those not found in
-`hash-sorted-by-md5.txt`).
+Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print those unconfirmed hashes (those not found in `hash-sorted-by-md5.txt`).
 
 ```bash
 ./check_hash good hash-sorted-by-md5.txt data.txt
 ```
+
+The file `hash-sorted-by-md5.txt` now has known good hashes.  To obtain potentially known good filenames (note that this is the weakess claim in so far malware detection)
+
+```bash
+LC_ALL='C' cat NSRLFile.txt | \
+  awk -F, 'NR>1{print $4}' | \
+  sed -e 's/"//g' | \
+  tr '[:lower:]' '[:upper:]' | \
+  sort | uniq > filename-goods.txt 
+```
+
+The same technique can be applied to for identifying unrecognized files.  Again, we emphasize that this process supports an extremely weak claim.
 
 ## References
 
