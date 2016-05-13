@@ -52,7 +52,45 @@ Once the data collection period is over, the entire data collection artifacts ca
 
 A package `$hostname.tar.gz` will be created.  This file can be copied back into a central repository for analysis at a later time.
 
+## Analyze
+
+Once the data has been collected, we'd need to analyze for malware.  The generalapproach for data analysis is based on chained processing flow:
+
+1. Identify "known bads" by checking hash against blacklist
+2. Eliminate "known "goods" by checking hash against whitelist
+3. Tag potentially bad by checking filenames against blacklist 
+4. Tag potentially bad by checking filenames not on the whitelist 
+5. Manual review of remaining candidates from 1, 2, 3 and 4  
+
+### Known Bads 
+
+There is no single recipe for obtaining known bads other that scouring the Internet for bad signatures.
+
+### Known Goods
+
+The best source for known good hash can be obtained from the [NIST National Software Reference Library](http://www.nsrl.nist.gov/index.html).  Since the data provided on the ISO image from NSRL is large, we'd need to trim it down.
+
+1. Perform a soft mount on the ISO
+2. Unzip the file `NSRLFile.txt.zip` found in `RDS_Unified`
+3. Extract the MD5 sum hash:
+```bash
+cat NSRLFile.txt  | awk -F, 'NR > 1{print $2,$4}' > hash.txt
+```
+4. There are many duplicates, so we should remove duplicates
+```bash
+cat hash.txt | uniq > hash-sorted-by-md5.txt
+```
+
+The file `hash-sorted-by-md5.txt` now has known good hashes and potentially known good filenames.  To obtain potentially known good filenames (note that this is the weakess claim in so far malware detection)
+
+```bash
+cat hash-sorted-by-md5.txt | \
+   awk -v FS='" "|"$' '{print $2}' | \
+   sort > filename-goods.txt 
+```
+
 ## References
 
 - https://cisofy.com/lynis
 - https://github.com/pentestmonkey/unix-privesc-check
+- http://www.nsrl.nist.gov/index.html
