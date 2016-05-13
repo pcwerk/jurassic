@@ -86,7 +86,7 @@ The file `hash-sorted-by-md5.txt` now has known good hashes and potentially know
 ```bash
 cat hash-sorted-by-md5.txt | \
    awk -v FS='" "|"$' '{print $2}' | \
-   sort > filename-goods.txt 
+   sort | uniq > filename-goods.txt 
 ```
 
 ## References
