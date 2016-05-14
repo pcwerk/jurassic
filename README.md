@@ -6,8 +6,8 @@ Jurassic is a suite of tools and tutorials -- it is not a one stop shop for arti
 
 To check for unix system vulnerabilities, we recommend using 
 
-  * [lynis](https://cisofy.com/lynis/)
-  * [unix-privesc-check](https://github.com/pentestmonkey/unix-privesc-check)
+* [lynis](https://cisofy.com/lynis/)
+* [unix-privesc-check](https://github.com/pentestmonkey/unix-privesc-check)
 
 Both of these are formidable tool sets and both of are freely available.
 
@@ -79,9 +79,8 @@ The `check_hash` program will examine `data.txt` and report if any of its hashes
 
 The best source for known good hash can be obtained from the [NIST National Software Reference Library](http://www.nsrl.nist.gov/index.html).  Since the data provided on the ISO image from NSRL is large, we'd need to trim it down.
 
-1. Perform a soft mount on the ISO
-2. Unzip the file `NSRLFile.txt.zip` found in `RDS_Unified`
-3. Extract the MD5 sum hash:
+Unzip the file `NSRLFile.txt.zip` found in `RDS_Unified` ISO and extract the MD5 sum hash found in `NSRLFile.txt`:
+
 ```bash
 cat NSRLFile.txt | \
   awk -F, 'NR>1{print $2}' | \
@@ -93,10 +92,12 @@ cat NSRLFile.txt | \
 Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print those unconfirmed hashes (those not found in `hash-sorted-by-md5.txt`).
 
 ```bash
-./check_hash good hash-sorted-by-md5.txt data.txt
+./check_hash good hash-sorted-by-md5.txt data.txt > unknown-hashes.txt
 ```
 
-The file `hash-sorted-by-md5.txt` now has known good hashes.  To obtain potentially known good filenames (note that this is the weakess claim in so far malware detection)
+The file `unknown-hashes.txt` contains unconfirmed hashes and requires further investigation.
+
+To obtain potentially known good filenames (note that this is the weakess claim in so far malware detection)
 
 ```bash
 LC_ALL='C' cat NSRLFile.txt | \
@@ -106,7 +107,11 @@ LC_ALL='C' cat NSRLFile.txt | \
   sort | uniq > filename-goods.txt 
 ```
 
-The same technique can be applied to for identifying unrecognized files.  Again, we emphasize that this process supports an extremely weak claim.
+* The `LC_ALL='C'` is to set the ENV variable `LC_ALL` so that `sed` won't choke on international filenames.  
+* We now are interested in column 4, thus `$4` in the `awk` print 
+
+The same technique can be applied to for identifying unrecognized files.  Again, we emphasize that this process supports an extremely weak claim and probably not worth doing.
+
 
 ## References
 
