@@ -82,9 +82,9 @@ The `check_hash` program will examine `data.txt` and report if any of its hashes
 
 ### Known Goods
 
-The best source for known good hash can be obtained from the [NIST National Software Reference Library](http://www.nsrl.nist.gov/index.html).  Since the data provided on the ISO image from NSRL is large, we'd need to trim it down.
+The best source for known goods can be obtained from the [NIST National Software Reference Library](http://www.nsrl.nist.gov/index.html).  Since the data provided on the ISO image from NSRL database is large, we'd need to trim it down.
 
-Unzip the file `NSRLFile.txt.zip` found in `RDS_Unified` ISO and extract the MD5 sum hash found in `NSRLFile.txt`:
+Unzip the file `NSRLFile.txt.zip` found in `RDS_Unified` ISO. The MD5 hashes are embedded in file `NSRLFile.txt`:
 
 ```bash
 cat NSRLFile.txt | \
@@ -102,7 +102,7 @@ Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print those uncon
 
 The file `unknown-hashes.txt` contains unconfirmed hashes and requires further investigation.
 
-To obtain potentially known good filenames (note that this is the weakess claim in so far malware detection)
+To obtain potentially known good filenames.  We emphasize that this process supports an extremely weak claim and is probably not worth doing.  That being said, the same technique can be applied to for identifying unrecognized files.  
 
 ```bash
 LC_ALL='C' cat NSRLFile.txt | \
@@ -114,8 +114,8 @@ LC_ALL='C' cat NSRLFile.txt | \
 
 * The `LC_ALL='C'` is to set the ENV variable `LC_ALL` so that `sed` won't choke on international filenames.  
 * We now are interested in column 4, thus `$4` in the `awk` print 
-
-The same technique can be applied to for identifying unrecognized files.  Again, we emphasize that this process supports an extremely weak claim and probably not worth doing.
+* `filename-goods.txt` is a messy text file that contains one filename per line and would need to be cleaned up somemore before being useful
+* `check_hash.cpp` would have to be modified to support entries with spaces in between words
 
 
 ## References
