@@ -54,14 +54,19 @@ A package `$hostname.tar.gz` will be created.  This file can be copied back into
 
 ## Analyze
 
-Once the data has been collected, we'd need to analyze for malware. The generalapproach for data analysis is based on chained processing
-flow:
+Once the data has been collected, we'd need to analyze for malware. The general approach for data analysis is based on chained processing flow:
 
 1. Identify "known bads" by checking hash against blacklist
 2. Eliminate "known "goods" by checking hash against whitelist
 3. Tag potentially bad by checking filenames against blacklist 
 4. Tag potentially bad by checking filenames not on the whitelist 
 5. Manual review of remaining candidates from 1, 2, 3 and 4
+
+#### `check_hash` application
+
+`check_hash` is a fast C/C++ program that utilizes an `unordered_map` implementation to look up known good or known bad artifacts.  It is capable of handling, for example the NSRL database, 45 million hash in entries in a couple of minutes.  Once loaded, look up time is *< 1 sec* for each entry.
+
+To compile the `check_hash` program, you'd need a C++ compiler and `make` program. On (almost all) Linux systems and OSX, just type `make` inside the `analyze` directory.  For OSX, make sure that XCode (with commandline tools) is installed.
 
 ### Known Bads 
 
