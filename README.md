@@ -62,13 +62,13 @@ Once the data has been collected, we'd need to analyze for malware. The general 
 4. Tag potentially bad by checking filenames not on the whitelist 
 5. Manual review of remaining candidates from 1, 2, 3 and 4
 
-#### `check_hash` program
+### `check_hash` program
 
 The `check_hash` program is a fast C/C++ program that utilizes an `unordered_map` implementation to lookup known good or known bad artifacts.  It is capable of handling (for example, the NSRL database) 45 million hash entries in a couple of minutes.  Once loaded, the look up time is *< 1 sec* for each entry.
 
 To compile the `check_hash` program, you'd need a C++ compiler and `make` program. On (almost all) Linux systems and OSX, just type `make` inside the `analyze` directory.  For OSX, make sure that XCode (with commandline tools) is installed.
 
-### Known Bads 
+### Known Bad Hashes
 
 There is no single recipe for obtaining known bads other that scouring the Internet for bad signatures.
 
@@ -83,7 +83,7 @@ The `check_hash` program will examine `data.txt` and report if any of its hashes
 * `data.txt.bad` which is a hash file that *definitely* contains evil hashes (based on the `malware.txt`)
 * `data.txt.unknown` which is a hash file that contains undetermined contents
 
-### Known Goods
+### Known Good Hashes
 
 The best source for known goods can be obtained from the [NIST National Software Reference Library](http://www.nsrl.nist.gov/index.html).  Since the data provided on the ISO image from NSRL database is large, we'd need to trim it down.
 
@@ -107,6 +107,8 @@ When running the above command it generates two files:
 
 * `data.txt.bad` which is a hash file that *definitely* contains good hashes (based on the `hash-sorted-by-md5.txt`)
 * `data.txt.unknown` which is a hash file that contains undetermined contents
+
+### Filename Analysis
 
 To obtain potentially known good filenames.  We emphasize that this process supports an extremely weak claim and is probably not worth doing.  That being said, the same technique can be applied to for identifying unrecognized files.  
 
