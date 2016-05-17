@@ -9,8 +9,11 @@
 
 #include "hash_table.h"
 
+#define VERSION "0.02"
+
 int main(int argc, char **argv)
 {
+  std::cout << "check_hash version " << VERSION << std::endl << std::endl;
   if (argc < 4) {
     std::cout << "usage: " << argv[0] 
               << " [bad|good] <reference-file> <data-file>" 
