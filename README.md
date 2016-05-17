@@ -78,7 +78,10 @@ Given two files `malware.txt` (a file containing all hash of know bad malwares) 
 ./check_hash bad malware.txt data.txt
 ```
 
-The `check_hash` program will examine `data.txt` and report if any of its hashes are found in `malware.txt`
+The `check_hash` program will examine `data.txt` and report if any of its hashes are found in `malware.txt`  It generates two files:
+
+* `data.txt.bad` which is a hash file that *definitely* contains evil hashes (based on the `malware.txt`)
+* `data.txt.unknown` which is a hash file that contains undetermined contents
 
 ### Known Goods
 
@@ -97,10 +100,13 @@ cat NSRLFile.txt | \
 Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print those unconfirmed hashes (those not found in `hash-sorted-by-md5.txt`).
 
 ```bash
-./check_hash good hash-sorted-by-md5.txt data.txt > unknown-hashes.txt
+./check_hash good reference.txt data.txt 
 ```
 
-The file `unknown-hashes.txt` contains unconfirmed hashes and requires further investigation.
+When running the above command it generates two files:
+
+* `data.txt.bad` which is a hash file that *definitely* contains good hashes (based on the `reference.txt`)
+* `data.txt.unknown` which is a hash file that contains undetermined contents
 
 To obtain potentially known good filenames.  We emphasize that this process supports an extremely weak claim and is probably not worth doing.  That being said, the same technique can be applied to for identifying unrecognized files.  
 
