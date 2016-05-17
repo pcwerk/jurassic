@@ -49,14 +49,14 @@ int main(int argc, char **argv)
     }
   }
   std::cout << "reference count " << reference.size() << std::endl;
-  std::cout << "data count " << data.size() << std::endl;
+  std::cout << "data count      " << data.size() << std::endl;
 
   // only print bad ones
   if (mode == "good") {
     std::ofstream unk(unk_filename);
     std::ofstream good(out_filename);
 
-    std::cout << "good file: " << out_filename << std::endl;
+    std::cout << "good file       " << out_filename << std::endl;
     for (std::list<std::string>::iterator p = data.begin();
          p != data.end(); ++p) {
       if (! reference.hasCaseIgnore(*p)) {
@@ -71,14 +71,14 @@ int main(int argc, char **argv)
     unk.close();
     good.close();
 
-    std::cout << "good hashes found: " << counter << std::endl;
+    std::cout << "good hashes     " << counter << std::endl;
   }
 
   if (mode == "bad") {
     std::ofstream unk(unk_filename);
     std::ofstream bad(out_filename);
 
-    std::cout << "bad file: " << out_filename << std::endl;
+    std::cout << "bad file        " << out_filename << std::endl;
 
     for (std::list<std::string>::iterator p = data.begin();
          p != data.end(); ++p) {
@@ -94,11 +94,11 @@ int main(int argc, char **argv)
     unk.close();
     bad.close();
 
-    std::cout << "bad hashes found: " << counter << std::endl;
+    std::cout << "bad hashes      " << counter << std::endl;
   }
   
-  std::cout << "unkown file: " << unk_filename << std::endl;
-  std::cout << "unknown hashes: " << unk_counter << std::endl;
+  std::cout << "unkown file     " << unk_filename << std::endl;
+  std::cout << "unknown hashes  " << unk_counter << std::endl;
 
   return 0;
 }
