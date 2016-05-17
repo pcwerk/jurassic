@@ -100,12 +100,12 @@ cat NSRLFile.txt | \
 Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print those unconfirmed hashes (those not found in `hash-sorted-by-md5.txt`).
 
 ```bash
-./check_hash good reference.txt data.txt 
+./check_hash good hash-sorted-by-md5.txt data.txt 
 ```
 
 When running the above command it generates two files:
 
-* `data.txt.bad` which is a hash file that *definitely* contains good hashes (based on the `reference.txt`)
+* `data.txt.bad` which is a hash file that *definitely* contains good hashes (based on the `hash-sorted-by-md5.txt`)
 * `data.txt.unknown` which is a hash file that contains undetermined contents
 
 To obtain potentially known good filenames.  We emphasize that this process supports an extremely weak claim and is probably not worth doing.  That being said, the same technique can be applied to for identifying unrecognized files.  
