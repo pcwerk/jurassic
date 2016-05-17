@@ -4,6 +4,7 @@
 #include <float.h>
 
 #include <limits>
+#include <climits>
 #include <iostream>
 #include <string>
 
