@@ -103,3 +103,7 @@ const std::string HashTable::toString(const std::string spacing)
   return oss.str();  
 }
 
+const int HashTable::size()
+{
+  return pTable.size();
+}

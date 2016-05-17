@@ -19,6 +19,7 @@ public:
   const bool hasCaseIgnore(const std::string &key);
   const std::string get(const std::string &key);
   const std::string toString(const std::string spacing = "");
+  const int size();
 
   void initOneColumn(const std::string &filename);
   void initTwoColumns(const std::string &filename);
