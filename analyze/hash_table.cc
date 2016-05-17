@@ -20,6 +20,7 @@ void HashTable::initOneColumn(std::string const &filename)
     if (!(iss >> key)) {
       break;
     }
+    // std::transform(key.begin(), key.end(), key.begin(), ::toupper);
     pTable[key] = key;
   }
 }
@@ -36,6 +37,8 @@ void HashTable::initTwoColumns(std::string const &filename)
       break;
     }
 
+    // std::transform(key.begin(), key.end(), key.begin(), ::toupper);
+    // std::transform(value.begin(), value.end(), value.begin(), ::toupper);
     pTable[key] = value;
   }
 }
