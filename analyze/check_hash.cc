@@ -24,6 +24,8 @@ int main(int argc, char **argv)
   std::string good_filename = data_filename + ".good";
   std::string bad_filename = data_filename + ".bad";
   std::string unk_filename = data_filename + ".unknown";
+  int counter = 0;
+  int unk_counter = 0;
 
   // read reference file
   HashTable reference;
@@ -46,7 +48,6 @@ int main(int argc, char **argv)
   }
   std::cout << "reference count " << reference.size() << std::endl;
   std::cout << "data count " << data.size() << std::endl;
-  std::cout << "unkown file: " << unk_filename << std::endl;
 
   // only print bad ones
   if (mode == "good") {
@@ -54,20 +55,28 @@ int main(int argc, char **argv)
     std::ofstream good(good_filename);
 
     std::cout << "good file: " << good_filename << std::endl;
+#if VERBOSE
     std::cout << "potentially bad hash" << std::endl;
     std::cout << "----- " << std::endl;
+#endif
     for (std::list<std::string>::iterator p = data.begin();
          p != data.end(); ++p) {
       if (! reference.hasCaseIgnore(*p)) {
+#if VERBOSE
         std::cout << *p << std::endl;
+#endif
 	unk << *p << std::endl;
+        unk_counter++;
       } else {
 	good << *p << std::endl;
+        counter++;
       }
     }
 
     unk.close();
     good.close();
+
+    std::cout << "good hashes found: " << counter << std::endl;
   }
 
   if (mode == "bad") {
@@ -75,22 +84,33 @@ int main(int argc, char **argv)
     std::ofstream bad(bad_filename);
 
     std::cout << "bad file: " << bad_filename << std::endl;
+#if VERBOSE
     std::cout << "definitely bad hash" << std::endl;
     std::cout << "----- " << std::endl;
+#endif
 
     for (std::list<std::string>::iterator p = data.begin();
          p != data.end(); ++p) {
       if (reference.hasCaseIgnore(*p)) {
+#if VERBOSE
         std::cout << *p << std::endl;
+#endif
 	bad << *p << std::endl;
+        counter++;
       } else {
 	unk << *p << std::endl;
+        unk_counter++;
       }
     }
 
     unk.close();
     bad.close();
+
+    std::cout << "bad hashes found: " << counter << std::endl;
   }
   
+  std::cout << "unkown file: " << unk_filename << std::endl;
+  std::cout << "unknown hashes: " << unk_counter << std::endl;
+
   return 0;
 }
