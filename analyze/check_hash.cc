@@ -9,14 +9,14 @@
 
 #include "hash_table.h"
 
-#define VERSION "0.02"
+#define VERSION "0.03"
 
 int main(int argc, char **argv)
 {
-  std::cout << "check_hash version " << VERSION << std::endl << std::endl;
-  if (argc < 4) {
-    std::cout << "usage: " << argv[0] 
-              << " [bad|good] <reference-file> <data-file>" 
+  std::cout << "check_hash version " << VERSION << std::endl;
+  if (argc < 6) {
+    std::cout << "usage: " << argv[0] << " "
+              << "[bad|good] <reference> <data-file> <unknown> <output>" 
 	      << std::endl;
     exit(1);
   }
@@ -24,9 +24,8 @@ int main(int argc, char **argv)
   std::string mode = argv[1];
   std::string reference_filename = argv[2];
   std::string data_filename = argv[3];
-  std::string good_filename = data_filename + ".good";
-  std::string bad_filename = data_filename + ".bad";
-  std::string unk_filename = data_filename + ".unknown";
+  std::string unk_filename = argv[4];
+  std::string out_filename = argv[5];
   int counter = 0;
   int unk_counter = 0;
 
@@ -55,19 +54,12 @@ int main(int argc, char **argv)
   // only print bad ones
   if (mode == "good") {
     std::ofstream unk(unk_filename);
-    std::ofstream good(good_filename);
+    std::ofstream good(out_filename);
 
-    std::cout << "good file: " << good_filename << std::endl;
-#if VERBOSE
-    std::cout << "potentially bad hash" << std::endl;
-    std::cout << "----- " << std::endl;
-#endif
+    std::cout << "good file: " << out_filename << std::endl;
     for (std::list<std::string>::iterator p = data.begin();
          p != data.end(); ++p) {
       if (! reference.hasCaseIgnore(*p)) {
-#if VERBOSE
-        std::cout << *p << std::endl;
-#endif
 	unk << *p << std::endl;
         unk_counter++;
       } else {
@@ -84,20 +76,13 @@ int main(int argc, char **argv)
 
   if (mode == "bad") {
     std::ofstream unk(unk_filename);
-    std::ofstream bad(bad_filename);
+    std::ofstream bad(out_filename);
 
-    std::cout << "bad file: " << bad_filename << std::endl;
-#if VERBOSE
-    std::cout << "definitely bad hash" << std::endl;
-    std::cout << "----- " << std::endl;
-#endif
+    std::cout << "bad file: " << out_filename << std::endl;
 
     for (std::list<std::string>::iterator p = data.begin();
          p != data.end(); ++p) {
       if (reference.hasCaseIgnore(*p)) {
-#if VERBOSE
-        std::cout << *p << std::endl;
-#endif
 	bad << *p << std::endl;
         counter++;
       } else {
