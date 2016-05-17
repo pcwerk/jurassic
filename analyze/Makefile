@@ -25,7 +25,7 @@ clean:
 	/bin/rm -f *.o check_hash
 
 squeaky: clean
-	/bin/rm -f *~ *.bak 
+	/bin/rm -f *~ *.bak *.good *.bad *.unknown
 
 # dependencies
 

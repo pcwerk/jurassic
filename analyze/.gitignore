@@ -1,2 +1,5 @@
 *.o
+*.good
+*.bad
+*.unknown
 check_hash
