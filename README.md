@@ -52,15 +52,15 @@ Once the data collection period is over, the entire data collection artifacts ca
 
 A package `$hostname.tar.gz` will be created.  This file can be copied back into a central repository for analysis at a later time.
 
-## Analyze
+## Analyze Collected Hashes
 
 Once the data has been collected, we'd need to analyze for malware. The general approach for data analysis is based on chained processing flow:
 
-1. Identify "known bads" by checking hash against blacklist
-2. Eliminate "known "goods" by checking hash against whitelist
-3. Tag potentially bad by checking filenames against blacklist 
-4. Tag potentially bad by checking filenames not on the whitelist 
-5. Manual review of remaining candidates from 1, 2, 3 and 4
+1. Identify malware by checking hashes against a blacklist
+2. Eliminate known goods by checking hashes against whitelist
+3. The remaining hashes from 1 and 2 are now considered unknowns
+4. Review files associated with hashes from 3
+5. Submit remaining hashes against online sites
 
 ### Automated Tool: `check_hash`
 
