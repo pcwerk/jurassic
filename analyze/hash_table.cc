@@ -9,6 +9,11 @@
 #include "utility.h"
 #include "hash_table.h"
 
+HashTable::HashTable(const std::string &filename)
+{
+  initOneColumn(filename);
+}
+
 void HashTable::initOneColumn(std::string const &filename)
 {
   std::ifstream infile(filename);
@@ -20,7 +25,7 @@ void HashTable::initOneColumn(std::string const &filename)
     if (!(iss >> key)) {
       break;
     }
-    // std::transform(key.begin(), key.end(), key.begin(), ::toupper);
+    std::transform(key.begin(), key.end(), key.begin(), ::toupper);
     pTable[key] = key;
   }
 }

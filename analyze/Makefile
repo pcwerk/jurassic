@@ -1,5 +1,6 @@
 
 CC = g++ -O2 -std=c++11
+CC = g++ -g -std=c++11
 
 CFLAGS = -I. -g -Wall
 LDFLAGS = -L.

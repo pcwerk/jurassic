@@ -1,104 +1,118 @@
 // --*-c++-*--
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 #include <list>
+#include <map>
+#include <set>
 
 #include "hash_table.h"
 
-#define VERSION "0.03"
+#define VERSION "0.0.4"
 
 int main(int argc, char **argv)
 {
   std::cout << "check_hash version " << VERSION << std::endl;
   if (argc < 6) {
     std::cout << "usage: " << argv[0] << " "
-              << "[bad|good] <reference> <data-file> <unknown> <output>" 
+              << "[bad|good] <reference-file> <input-data-file> <unknown-file> <output-file>" 
 	      << std::endl;
     exit(1);
   }
-
+  
   std::string mode = argv[1];
   std::string reference_filename = argv[2];
-  std::string data_filename = argv[3];
-  std::string unk_filename = argv[4];
+  std::string input_data_filename = argv[3];
+  std::string output_unknown_filename = argv[4];
   std::string out_filename = argv[5];
-  int counter = 0;
-  int unk_counter = 0;
+  
+  HashTable reference(reference_filename);
+  
+  std::set<std::string> input_data;
+  std::set<std::string> output_data;
+  std::set<std::string> unknown_hashes;
+  
+  int line_count = 0;
 
-  // read reference file
-  HashTable reference;
-  reference.initOneColumn(reference_filename);
-
-  // read data file
-  std::list<std::string> data;
   {
-    std::ifstream infile(data_filename);
+    std::ifstream infile(input_data_filename);
     std::string line;
     
     while (std::getline(infile, line)) {
       std::istringstream iss(line);
       std::string key;
+      
       if (!(iss >> key)) {
         break;
       }
-      data.push_back(key);
+      
+      std::transform(key.begin(), key.end(), key.begin(), ::toupper);
+      input_data.insert(key);
+      line_count++;
     }
   }
-  std::cout << "reference count " << reference.size() << std::endl;
-  std::cout << "data count      " << data.size() << std::endl;
 
-  // only print bad ones
   if (mode == "good") {
-    std::ofstream unk(unk_filename);
-    std::ofstream good(out_filename);
-
-    std::cout << "good file       " << out_filename << std::endl;
-    for (std::list<std::string>::iterator p = data.begin();
-         p != data.end(); ++p) {
+    for (std::set<std::string>::iterator p = input_data.begin();
+	 p != input_data.end(); ++p) {
       if (! reference.hasCaseIgnore(*p)) {
-	unk << *p << std::endl;
-        unk_counter++;
+	unknown_hashes.insert(*p);
       } else {
-	good << *p << std::endl;
-        counter++;
+	output_data.insert(*p);
       }
     }
-
-    unk.close();
-    good.close();
-
-    std::cout << "good hashes     " << counter << std::endl;
-  }
-
-  if (mode == "bad") {
-    std::ofstream unk(unk_filename);
-    std::ofstream bad(out_filename);
-
-    std::cout << "bad file        " << out_filename << std::endl;
-
-    for (std::list<std::string>::iterator p = data.begin();
-         p != data.end(); ++p) {
+  } else if (mode == "bad") {
+    for (std::set<std::string>::iterator p = input_data.begin();
+         p != input_data.end(); ++p) {
       if (reference.hasCaseIgnore(*p)) {
-	bad << *p << std::endl;
-        counter++;
+	output_data.insert(*p);
       } else {
-	unk << *p << std::endl;
-        unk_counter++;
+	unknown_hashes.insert(*p);
       }
     }
-
-    unk.close();
-    bad.close();
-
-    std::cout << "bad hashes      " << counter << std::endl;
+  } else {
+    std::cout << "unknown mode: " << mode << std::endl;
+    exit(1);
   }
   
-  std::cout << "unkown file     " << unk_filename << std::endl;
-  std::cout << "unknown hashes  " << unk_counter << std::endl;
+  // save results
+  {
+    std::ofstream out(out_filename);
+
+    for (std::set<std::string>::iterator p = output_data.begin();
+	 p != output_data.end(); ++p) {
+      out << *p << std::endl;
+    }
+
+    out.close();
+  }
+
+  // save unknowns
+  {
+    std::ofstream unk(output_unknown_filename);
+
+    for (std::set<std::string>::iterator p = unknown_hashes.begin();
+	 p != unknown_hashes.end(); ++p) {
+      unk << *p << std::endl;
+    }
+
+    unk.close();
+  }
+
+  std::cout << "run mode          " << mode << std::endl;
+  std::cout << "reference file    " << reference_filename << std::endl;
+  std::cout << "reference count   " << reference.size() << std::endl;
+  std::cout << "input data file   " << input_data_filename << std::endl;
+  std::cout << "input data count  " << line_count << std::endl;
+  std::cout << "unique data count " << input_data.size() << std::endl;
+  std::cout << "unknown out file  " << output_unknown_filename << std::endl;
+  std::cout << "unknown count     " << unknown_hashes.size() << std::endl;
+  std::cout << "out file          " << out_filename << std::endl;
+  std::cout << "out file count    " << output_data.size() << std::endl;
 
   return 0;
 }

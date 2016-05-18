@@ -8,6 +8,7 @@
 class HashTable {
 public:
   HashTable() { };
+  HashTable(const std::string &filename);
 
 public:
   void set(const std::string &key, const std::string &value);
