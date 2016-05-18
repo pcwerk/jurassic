@@ -82,7 +82,7 @@ There is no single recipe for obtaining known bads other that scouring the Inter
 Given two files `malware.txt` (a file containing all hash of know bad malwares) and `data.txt` which is the collected artifacts.
 
 ```bash
-./check_hash bad malware.txt data.txt
+./check_hash bad malware.txt data.txt data.txt.unkown data.txt.bad
 ```
 
 The `check_hash` program will examine `data.txt` and report if any of its hashes are found in `malware.txt`  It generates two files:
@@ -107,12 +107,12 @@ cat NSRLFile.txt | \
 Using `hash-sorted-by-md5.txt` as a reference file, we can tag/print those unconfirmed hashes (those not found in `hash-sorted-by-md5.txt`).
 
 ```bash
-./check_hash good hash-sorted-by-md5.txt data.txt 
+./check_hash good hash-sorted-by-md5.txt data.txt data.txt.unknown data.txt.good
 ```
 
 When running the above command it generates two files:
 
-* `data.txt.bad` which is a hash file that *definitely* contains good hashes (based on the `hash-sorted-by-md5.txt`)
+* `data.txt.good` which is a hash file that *definitely* contains good hashes (based on the `hash-sorted-by-md5.txt`)
 * `data.txt.unknown` which is a hash file that contains undetermined contents
 
 ### Filename Analysis
