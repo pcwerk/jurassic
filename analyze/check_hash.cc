@@ -12,23 +12,23 @@
 
 #include "hash_table.h"
 
-#define VERSION "0.0.4"
+#define VERSION "0.0.5"
 
 int main(int argc, char **argv)
 {
   std::cout << "check_hash version " << VERSION << std::endl;
-  if (argc < 6) {
+  if (argc < 5) {
     std::cout << "usage: " << argv[0] << " "
-              << "[bad|good] <reference-file> <input-data-file> <unknown-file> <output-file>" 
+              << "<reference-file> <input-data-file> <unknown-file> <output-file>" 
 	      << std::endl;
     exit(1);
   }
   
-  std::string mode = argv[1];
-  std::string reference_filename = argv[2];
-  std::string input_data_filename = argv[3];
-  std::string output_unknown_filename = argv[4];
-  std::string out_filename = argv[5];
+  int c = 1;
+  std::string reference_filename = argv[c++];
+  std::string input_data_filename = argv[c++];
+  std::string output_unknown_filename = argv[c++];
+  std::string out_filename = argv[c++];
   
   HashTable reference(reference_filename);
   
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
   std::set<std::string> unknown_hashes;
   
   int line_count = 0;
-
+  
   {
     std::ifstream infile(input_data_filename);
     std::string line;
@@ -55,28 +55,14 @@ int main(int argc, char **argv)
       line_count++;
     }
   }
-
-  if (mode == "good") {
-    for (std::set<std::string>::iterator p = input_data.begin();
-	 p != input_data.end(); ++p) {
-      if (! reference.hasCaseIgnore(*p)) {
-	unknown_hashes.insert(*p);
-      } else {
-	output_data.insert(*p);
-      }
+  
+  for (std::set<std::string>::iterator p = input_data.begin();
+       p != input_data.end(); ++p) {
+    if (! reference.hasCaseIgnore(*p)) {
+      unknown_hashes.insert(*p);
+    } else {
+      output_data.insert(*p);
     }
-  } else if (mode == "bad") {
-    for (std::set<std::string>::iterator p = input_data.begin();
-         p != input_data.end(); ++p) {
-      if (reference.hasCaseIgnore(*p)) {
-	output_data.insert(*p);
-      } else {
-	unknown_hashes.insert(*p);
-      }
-    }
-  } else {
-    std::cout << "unknown mode: " << mode << std::endl;
-    exit(1);
   }
   
   // save results
@@ -103,16 +89,15 @@ int main(int argc, char **argv)
     unk.close();
   }
 
-  std::cout << "run mode          " << mode << std::endl;
-  std::cout << "reference file    " << reference_filename << std::endl;
-  std::cout << "reference count   " << reference.size() << std::endl;
-  std::cout << "input data file   " << input_data_filename << std::endl;
-  std::cout << "input data count  " << line_count << std::endl;
-  std::cout << "unique data count " << input_data.size() << std::endl;
-  std::cout << "unknown out file  " << output_unknown_filename << std::endl;
-  std::cout << "unknown count     " << unknown_hashes.size() << std::endl;
-  std::cout << "out file          " << out_filename << std::endl;
-  std::cout << "out file count    " << output_data.size() << std::endl;
+  std::cout << "reference file    " << reference_filename; 
+  std::cout << " (" << reference.size() << ")" << std::endl;
+  std::cout << "input data file   " << input_data_filename;
+  std::cout << " (" << line_count << ")";
+  std::cout << " (" << input_data.size() << ") " << std::endl;
+  std::cout << "unknown out file  " << output_unknown_filename;
+  std::cout << " (" << unknown_hashes.size() << ")" << std::endl;
+  std::cout << "out file          " << out_filename;
+  std::cout << " (" << output_data.size() << ")" << std::endl;
 
   return 0;
 }
