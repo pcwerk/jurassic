@@ -42,6 +42,7 @@ void HashTable::initTwoColumns(std::string const &filename)
       break;
     }
 
+    std::transform(key.begin(), key.end(), key.begin(), ::toupper);
     pTable[key] = value;
   }
 }
@@ -77,7 +78,6 @@ const bool HashTable::has(const std::string &key)
 const bool HashTable::hasCaseIgnore(const std::string &k)
 {
   std::string key = k;
-    
   std::transform(key.begin(), key.end(), key.begin(), ::toupper);
 
   if (pTable.find(key) == pTable.end())
@@ -90,6 +90,17 @@ const std::string HashTable::get(const std::string &key)
 {
   if (pTable.find(key) == pTable.end())
     return std::string("");
+  else
+    return pTable[key];
+}
+
+const std::string HashTable::getCaseIgnore(const std::string &k)
+{
+  std::string key = k;
+  std::transform(key.begin(), key.end(), key.begin(), ::toupper);
+
+  if (pTable.find(key) == pTable.end())
+    return "";
   else
     return pTable[key];
 }
@@ -112,4 +123,14 @@ const std::string HashTable::toString(const std::string spacing)
 const int HashTable::size()
 {
   return pTable.size();
+}
+
+HashTable::Iterator HashTable::begin()
+{
+  return pTable.begin();
+}
+
+HashTable::Iterator HashTable::end()
+{
+  return pTable.end();
 }

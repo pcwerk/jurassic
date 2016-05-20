@@ -12,7 +12,7 @@
 
 #include "hash_table.h"
 
-#define VERSION "0.0.5"
+#define VERSION "0.0.6"
 
 int main(int argc, char **argv)
 {

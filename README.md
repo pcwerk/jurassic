@@ -62,7 +62,7 @@ Once the data has been collected, we'd need to analyze for malware. The general 
 4. Review files associated with hashes from 3
 5. Submit remaining hashes against online sites
 
-### `check_hash`
+## `check_hash`
 
 The `check_hash` program is a fast C/C++ program that utilizes an `unordered_map` implementation to lookup known good or known bad artifacts.  It is capable of handling (for example, the NSRL database) 45 million hash entries in a couple of minutes.  Once loaded, the look up time is *< 1 sec* for each entry.
 
@@ -131,6 +131,20 @@ LC_ALL='C' cat NSRLFile.txt | \
 * We now are interested in column 4, thus `$4` in the `awk` print 
 * `filename-goods.txt` is a messy text file that contains one filename per line and would need to be cleaned up somemore before being useful
 * `check_hash.cpp` would have to be modified to support entries with spaces in between words
+
+## `match_unknown`
+
+`match_unknown` is a simple tool that can correlate unknown hashes with the original hash files.  This is with the assumption that the original hash file is of the format, `hash /path/to/file`, e.g.
+
+```
+0ef23aa43cad49780209d42fd2f0f07f  /bin/zcat
+```
+
+Usage is simple:
+
+```
+./match_unknown unknown.txt origin.txt out.txt 
+```
 
 
 ## References
