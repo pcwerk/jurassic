@@ -15,7 +15,7 @@ The regular expression for IP address is:
 '([0-9]{1,3}\.){3}[0-9]{1,3}'
 ```
 
-Using bash shell, we can quickly see grab the IP addresses out from this `README.md` file.
+Using bash shell, we can quickly see grab the IP addresses out from this text file.
 
 ```bash
 cat README.md | egrep '([0-9]{1,3}\.){3}[0-9]{1,3}'
@@ -38,28 +38,29 @@ for line in sys.stdin:
    for match in matches:
      print match
 ```
-Now we can extract IPs from the data file:
+
+Now we can extract IPs from the data file by feeding (by wipe of a pipe) the content of a text file (e.g. this `README.md` file) to the `snarf_ip.py` script.
 
 ```bash
 cat README.md | ./snarf_ip.py 
 ```
 
-Note that all over the above in one bash line:
+For class C IP addresses, we need to grab only the first three octets using the `awk` command.
 
 ```bash
-# grab class C
 cat README.md  | \
-  egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}' | \
+  ./snarf_ip.py | \
+  awk -F. '{print $1"."$2"."$3}' 
+```
+
+Next we want to sort and `uniq` the content and feed the output into a word counter `wc`.
+
+```bash
+cat README.md  | \
+  ./snarf_ip.py | \
   awk -F. '{print $1"."$2"."$3}' | \
-  sort -u | \
+  sort | \
+  uniq | \
   wc
 ```
 
-```bash
-# grab class B
-cat README.md  | \
-  egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}' | \
-  awk -F. '{print $1"."$2"}' | \
-  sort -u | \
-  wc
-```
