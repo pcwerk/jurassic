@@ -1,6 +1,6 @@
 # shells
 
-Let us assume a simple data file which contains IP addresses scattered throughout the document.  Our goal is to determine count the number of class B and class C IP addresses in the text file.
+Let us assume a simple data file which contains IP addresses scattered throughout the document.  Our objective is to count up the number of unique class C subnets.
 
 ```text
 client 10.10.255.2 requests host1.domain.com
@@ -9,7 +9,9 @@ client 10.10.255.4 requests host2.domain.com
 client 10.10.255.5 requests 10.10.255.3 10.10.255.4 10.10.10.12 
 ```
 
-The regular expression for IP address is:
+The process is to chain the unix commands through a series of pipes.  A pipe is a concept that takes the output from one program and feed it into another program.
+
+Let's first define the regular expression (or search pattern) for an IP address. This regex pattern is naive aas it searches four numeric octets and does not discrimate invalid ones, those with a value larger than 255.
 
 ```text
 '([0-9]{1,3}\.){3}[0-9]{1,3}'
