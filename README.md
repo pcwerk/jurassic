@@ -39,7 +39,7 @@ for line in sys.stdin:
      print match
 ```
 
-Now we can extract IPs from the data file by feeding (by wipe of a pipe) the content of a text file (e.g. this `README.md` file) to the `snarf_ip.py` script.
+Now we can extract IPs from a text file (e.g. this `README.md` file) using to the `snarf_ip.py` script.
 
 ```bash
 cat README.md | ./snarf_ip.py 
