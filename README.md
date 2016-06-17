@@ -66,3 +66,13 @@ cat README.md  | \
   wc
 ```
 
+Note that the `snarf_ip.py` script can be accomplished with the `grep` command and the `-o` option.
+
+```bash
+cat README.md | \
+  egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}' \
+  awk -F. '{print $1"."$2"."$3}' | \
+  sort | \
+  uniq | \
+  wc
+```
