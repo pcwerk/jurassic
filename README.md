@@ -24,7 +24,7 @@ Let's first define the regular expression (or search pattern) for an IP address.
 '([0-9]{1,3}\.){3}[0-9]{1,3}'
 ```
 
-Using bash shell, we can quickly see grab the IP addresses out from this text file.
+Using bash shell, we can quickly grab the IP addresses out from this text file.
 
 ```bash
 cat README.md | egrep '([0-9]{1,3}\.){3}[0-9]{1,3}'
