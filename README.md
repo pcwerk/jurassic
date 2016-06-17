@@ -4,7 +4,7 @@ This repository contains a series of tutorials designed to get users quickly up 
 
 ## Finding Needles in a Haystack 
 
-Let us assume a simple data file which contains IP addresses scattered throughout the document.  Our objective is to count up the number of unique class C subnets.
+Consider a text file containing randomly scattered IP addresses, our objective is to count up the number of unique [Class C](https://en.wikipedia.org/wiki/IPv4_subnetting_reference) subnets.
 
 ```text
 client 10.10.255.2 requests host1.domain.com
@@ -12,7 +12,7 @@ server responds domain.com 12.10.12.2
 client 10.10.255.4 requests host2.domain.com
 client 10.10.255.5 requests 10.10.255.3 10.10.255.4 10.10.10.12 
 ```
-For a short text file, this can be done by hand.  However, for large file, manual processing is not an option.  For this reason, we need to automate the process with scipts and native commands.
+For a short text file, this can be done by hand.  However, for a large file, manual processing is not an option.  For this reason, we need to automate the process with scipts and native commands.
 
 ### The Linux Way
 
@@ -54,7 +54,7 @@ Now we can extract IPs from a text file (e.g. this `README.md` file) using to th
 cat README.md | ./snarf_ip.py 
 ```
 
-For class C IP addresses, we need to grab only the first three octets using the `awk` command.
+For Class C IP addresses, we need to grab only the first three octets using the `awk` command.
 
 ```bash
 cat README.md  | \
