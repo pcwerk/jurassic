@@ -1,6 +1,12 @@
 # shells
 
+This repository contains a series of tutorials designed to get users quickly up and running with shell programming and automation.  We will touch a number of areas, including **bash**, **perl**, **python**, etc.  To goal is to get something done quickly and not necessarily pretty.
+
+## Finding Needles in a Haystack 
+
 Let us assume a simple data file which contains IP addresses scattered throughout the document.  Our objective is to count up the number of unique class C subnets.
+
+### The Linux Way
 
 ```text
 client 10.10.255.2 requests host1.domain.com
