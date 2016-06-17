@@ -6,16 +6,17 @@ This repository contains a series of tutorials designed to get users quickly up 
 
 Let us assume a simple data file which contains IP addresses scattered throughout the document.  Our objective is to count up the number of unique class C subnets.
 
-### The Linux Way
-
 ```text
 client 10.10.255.2 requests host1.domain.com
 server responds domain.com 12.10.12.2
 client 10.10.255.4 requests host2.domain.com
 client 10.10.255.5 requests 10.10.255.3 10.10.255.4 10.10.10.12 
 ```
+For a short text file, this can be done by hand.  However, for large file, manual processing is not an option.  For this reason, we need to automate the process with scipts and native commands.
 
-The process is to chain the unix commands through a series of pipes.  A pipe is a concept that takes the output from one program and feed it into another program.
+### The Linux Way
+
+The idea is to chain the unix commands through a series of pipes.  A pipe is a concept that takes the output from one program and feed it into another program.
 
 Let's first define the regular expression (or search pattern) for an IP address. This regex pattern is naive aas it searches four numeric octets and does not discrimate invalid ones, those with a value larger than 255.
 
@@ -29,7 +30,7 @@ Using bash shell, we can quickly see grab the IP addresses out from this text fi
 cat README.md | egrep '([0-9]{1,3}\.){3}[0-9]{1,3}'
 ```
 
-Note that the last line has multiple IP addresses.  So we would like to separate these and output each ip address into its own line.  Let's tackle this task with a simple python script.
+Note that the last line has multiple IP addresses.  So we would like to separate these and output each IP address into its own line.  Let's tackle this task with a simple python script.
 
 ```python
 #!/usr/bin/env python
