@@ -83,3 +83,29 @@ cat README.md | \
   uniq | \
   wc
 ```
+
+## Finding Needles in many Haystacks
+
+Considering a text file containing a list of keys, we are interested
+in identifying files containing any of the matching keys. For this the
+`grep` command is the best option. For example here is the file
+`keys.txt`:
+
+```text
+regular expression
+foobar
+```
+
+To loop through the contents of `keys.txt`, we would need a `for`
+loop:
+
+```bash
+#!/usr/bin/env bash
+
+export IFS='\n\r'
+for key in `cat keys.txt`; do
+  grep $key directory
+done
+```
+
+See [dig.sh](dig.sh) for a more complex version of the script.
