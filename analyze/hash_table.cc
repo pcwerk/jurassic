@@ -20,11 +20,15 @@ void HashTable::initOneColumn(std::string const &filename)
   std::string line;
   
   while (std::getline(infile, line)) {
+#if 0
     std::istringstream iss(line);
-    std::string key;
+#endif
+    std::string key = line;
+#if 0
     if (!(iss >> key)) {
       break;
     }
+#endif
     std::transform(key.begin(), key.end(), key.begin(), ::toupper);
     pTable[key] = key;
   }
