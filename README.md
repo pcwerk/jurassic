@@ -6,12 +6,12 @@ Jurassic is a suite of tools and tutorials -- it is not a one stop shop for arti
 
 To check for unix system vulnerabilities, we recommend using 
 
-* [lynis][1]
-* [unix-privesc-check][2]
+* [lynis](https://cisofy.com/lynis)
+* [unix-privesc-check](https://github.com/pentestmonkey/unix-privesc-check)
 
 Both of these are formidable tool sets and both of are freely available.
 
-When doing an analysis on any systems, it's important to ensure that actions do not negatively affect the system in review.  While this is a noble goal, it's not always a realistic goal.  To deconflict who/how in the aftermath, we recommend using the [script][3] command.
+When doing an analysis on any systems, it's important to ensure that actions do not negatively affect the system in review.  While this is a noble goal, it's not always a realistic goal.  To deconflict who/how in the aftermath, we recommend using the `script` command.
 
 ## Collect
 
@@ -146,9 +146,3 @@ Usage is simple:
 ./match_unknown unknown.txt origin.txt out.txt 
 ```
 
-
-## References
-
-[1] https://cisofy.com/lynis
-[2] https://github.com/pentestmonkey/unix-privesc-check
-[3] http://www.nsrl.nist.gov/index.html
