@@ -1,8 +1,4 @@
-# Jurassic
-
-Jurassic is a suite of tools and tutorials -- it is not a one stop shop for artifact collection.
-
-## System Check
+# System Check
 
 To check for unix system vulnerabilities, we recommend using 
 
@@ -12,6 +8,16 @@ To check for unix system vulnerabilities, we recommend using
 Both of these are formidable tool sets and both of are freely available.
 
 When doing an analysis on any systems, it's important to ensure that actions do not negatively affect the system in review.  While this is a noble goal, it's not always a realistic goal.  To deconflict who/how in the aftermath, we recommend using the `script` command.
+
+# Shell Tools
+
+1. Greps and find: [greps](greps/)
+2. Netcat: [netcat](netcat/)
+3. Memory dumps: [memory-dumps](memory-dumps/) 
+
+# Jurassic
+
+Jurassic is a suite of tools and tutorials -- it is not a one stop shop for artifact collection.
 
 ## Collect
 
@@ -145,4 +151,3 @@ Usage is simple:
 ```
 ./match_unknown unknown.txt origin.txt out.txt 
 ```
-
