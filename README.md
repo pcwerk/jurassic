@@ -13,7 +13,7 @@ When doing an analysis on any systems, it's important to ensure that actions do 
 
 1. Greps and find: [greps](greps/)
 2. Netcat: [netcat](netcat/)
-3. Memory dumps: [memory-dumps](memory-dumps/) 
+3. Memory dumps: [memory](memory/) 
 
 # Jurassic
 
