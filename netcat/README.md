@@ -6,7 +6,7 @@ pync-in.py listens to a user defined port on the local host, captures data 4096 
 
 pync-out.py takes two arguments. The first argument is the IP address of the remost. The second argument is the port number of the remote host. The script makes the socket connection based on the user defined IP address and port number and send data to output stream. When the transfer is over the socket connection will terminate. 
 
-## EXAMPLE
+## Example
 
 To listen on a port and receive data from input stream
 * $ ./pync-in.py \<port number\>
