@@ -17,3 +17,6 @@ Both of these are formidable tool sets and both of are freely available.
 * Data collection: [collect](collect/)
 * Analysis of collected data: [analyze](analyze/)
 
+## Resources
+* Scott Roberts has page on [IOCs](https://github.com/sroberts/awesome-iocs/blob/master/README.md) or Indicators of Compromise that is worth looking into.
+
