@@ -6,6 +6,7 @@ To check for unix system vulnerabilities, we recommend using the tools listed be
 
 * [lynis](https://cisofy.com/lynis)
 * [unix-privesc-check](https://github.com/pentestmonkey/unix-privesc-check)
+* [Using SysInternals Tools Like a Pro](https://www.howtogeek.com/school/sysinternals-pro/)
 
 Both of these are formidable tool sets and both of are freely available.
 
