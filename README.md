@@ -18,7 +18,11 @@ Both of these are formidable tool sets and both of are freely available.
 * Analysis of collected data: [analyze](analyze/)
 
 ## Resources
-* Scott Roberts has page on [IOCs](https://github.com/sroberts/awesome-iocs/blob/master/README.md) or Indicators of Compromise that is worth looking into.
 
-* Austin Taylor. [Detect Beaconing with Flare, Elastic Stack, and Intrusion Detection Systems](http://www.austintaylor.io/detect/beaconing/intrusion/detection/system/command/control/flare/elastic/stack/2017/06/10/detect-beaconing-with-flare-elasticsearch-and-intrusion-detection-systems/)
+* Roberts, Keelyn. [Finding Evil in DNS Traffic](http://www.securitytube.net/video/16825)
+
+* Roberts, Scott. [Awesome IOCs](https://github.com/sroberts/awesome-iocs/blob/master/README.md)
+
+* Taylor, Austin. [Detect Beaconing with Flare, Elastic Stack, and Intrusion Detection Systems](http://www.austintaylor.io/detect/beaconing/intrusion/detection/system/command/control/flare/elastic/stack/2017/06/10/detect-beaconing-with-flare-elasticsearch-and-intrusion-detection-systems/)
+
 
