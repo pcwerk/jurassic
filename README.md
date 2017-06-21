@@ -20,6 +20,8 @@ Both of these are formidable tool sets and both of are freely available.
 
 ## Resources
 
+* de Mendonça, João Collier [HOW TO ROCK WITH DNS: Patterns for Detection and Faster Spotting of Malicious Activities](https://www.sans.org/summit-archives/file/summit-archive-1492186474.pdf)
+
 * Roberts, Keelyn. [Finding Evil in DNS Traffic](http://www.securitytube.net/video/16825)
 
 * Roberts, Scott. [Awesome IOCs](https://github.com/sroberts/awesome-iocs/blob/master/README.md)
