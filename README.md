@@ -26,4 +26,4 @@ Both of these are formidable tool sets and both of are freely available.
 
 * Taylor, Austin. [Detect Beaconing with Flare, Elastic Stack, and Intrusion Detection Systems](http://www.austintaylor.io/detect/beaconing/intrusion/detection/system/command/control/flare/elastic/stack/2017/06/10/detect-beaconing-with-flare-elasticsearch-and-intrusion-detection-systems/)
 
-
+* Ueltschi, Tom. [Advanced Incident Detection and Threat Hunting using Sysmon and Splunk](https://youtu.be/vv_VXntQTpE)
